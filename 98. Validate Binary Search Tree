@@ -1,0 +1,30 @@
+#O(N)
+#O(h)
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def __init__(self):
+        self.prev = None
+        self.flag = True
+
+    def isValidBST(self, root: TreeNode) -> bool:
+        self.flag = True
+        self.inorder(root,None,None)
+        return self.flag
+
+    def inorder(self, root: TreeNode,min,max):
+        if root is None:
+            return
+        if self.flag==False:
+            return
+        if min!=None and root.val <= min:
+            self.flag=False
+        if max!=None and root.val >= max:
+            self.flag=False         
+        self.inorder(root.left,min,root.val)
+        self.inorder(root.right,root.val,max)
+
